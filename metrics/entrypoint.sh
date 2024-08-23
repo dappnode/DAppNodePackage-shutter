@@ -1,12 +1,21 @@
 #!/bin/sh
 
 update_user_settings() {
-    key=$1
-    value=$(eval echo \$$key)
+
+    keys="KEYPER_NAME PUSHGATEWAY_URL PUSHGATEWAY_USERNAME PUSHGATEWAY_PASSWORD"
 
     if [ ! -f "$USER_SETTINGS_FILE" ]; then
         touch "$USER_SETTINGS_FILE"
     fi
+
+    for key in $keys; do
+        update_user_setting "$key" "$(eval echo \$"$key")"
+    done
+}
+
+update_user_setting() {
+    key=$1
+    value=$(eval echo \$"$key")
 
     if [ -z "$value" ]; then
         echo "[INFO | metrics] Skipped updating $key in user settings file (empty value)"
@@ -25,7 +34,7 @@ update_user_settings() {
 }
 
 source_envs() {
-    set -a
+    set -a # Export all variables
 
     # shellcheck disable=SC1091
     if [ -f "${ASSETS_DIR}/variables.env" ]; then
@@ -46,14 +55,7 @@ source_envs() {
     set +a
 }
 
-# Create an empty JSON file in path USER_SETTINGS_FILE if it does not exist
-if [ ! -f "${USER_SETTINGS_FILE}" ]; then
-    echo "{}" >"${USER_SETTINGS_FILE}"
-fi
-
-update_user_settings "PUSHGATEWAY_URL" "${PUSHGATEWAY_URL}"
-update_user_settings "PUSHGATEWAY_USERNAME" "${PUSHGATEWAY_USERNAME}"
-update_user_settings "PUSHGATEWAY_PASSWORD" "${PUSHGATEWAY_PASSWORD}"
+update_user_settings
 
 if [ "${SHUTTER_PUSH_METRICS_ENABLED}" = "false" ]; then
     echo "[INFO | metrics] Metrics push is disabled"

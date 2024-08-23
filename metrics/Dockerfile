@@ -16,4 +16,6 @@ COPY --from=assets ${ASSETS_DIR}/ ${ASSETS_DIR}/
 COPY config/ /config/
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 
+RUN mkdir -p $(dirname ${USER_SETTINGS_FILE})
+
 ENTRYPOINT [ "entrypoint.sh" ]
