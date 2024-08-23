@@ -1,6 +1,18 @@
 #!/bin/bash
 
-set -eux
+# In case the config file has been imported
+get_values_from_config_file() {
+
+    #Check if the config file exists
+    if [ ! -f "$SHUTTER_CHAIN_CONFIG_FILE" ]; then
+        echo "[INFO | configure] Previous Shutter chain configuration file not found"
+        return
+    fi
+
+    echo "[INFO | configure] Getting values from an existing shutter chain configuration file..."
+
+    SHUTTERMINT_MONIKER=$(get_imported_value_if_undefined.sh "moniker" "$SHUTTER_CHAIN_CONFIG_FILE")
+}
 
 # shellcheck disable=SC1091
 if [[ -f ${ASSETS_DIR}/variables.env ]]; then
