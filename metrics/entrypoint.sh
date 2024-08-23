@@ -25,11 +25,11 @@ update_user_setting() {
     if grep -q "^$key=" "$USER_SETTINGS_FILE"; then
         # Update the existing key
         sed -i "s/^$key=.*/$key=$value/" "$USER_SETTINGS_FILE"
-        echo "[INFO | metrics] Updated $key to $value in $USER_SETTINGS_FILE"
+        echo "[INFO | metrics] Updated $key in $USER_SETTINGS_FILE"
     else
         # Add the new key
         echo "$key=$value" >>"$USER_SETTINGS_FILE"
-        echo "[INFO | metrics] Added $key=$value to $USER_SETTINGS_FILE"
+        echo "[INFO | metrics] Added $key to $USER_SETTINGS_FILE"
     fi
 }
 
