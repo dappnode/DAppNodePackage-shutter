@@ -39,8 +39,11 @@ services:
       PUSHGATEWAY_URL: "https://keyperingest.metrics.shutter.network/api/v1/write"
       PUSHGATEWAY_USERNAME: ""
       PUSHGATEWAY_PASSWORD: ""
+    volumes:
+      - metrics-config:/config
 
 volumes:
   db_data: {}
   chain: {}
   keyper-config: {}
+  metrics-config: {}
