@@ -8,7 +8,7 @@ fields:
       type: environment
       name: KEYPER_NAME
       service: [shutter, metrics]
-    required: false
+    required: true
 
   - id: private_key
     title: Input your Keyper Private Key

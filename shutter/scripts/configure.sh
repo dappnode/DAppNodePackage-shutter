@@ -1,16 +1,24 @@
 #!/bin/bash
 
+check_assets() {
+    # shellcheck disable=SC1091
+    if [[ ! -f ${ASSETS_DIR}/variables.env ]]; then
+        echo "[ERROR | configure] Missing variables file (${ASSETS_DIR}/variables)"
+        exit 1
+    fi
+}
+
 generate_keyper_config() {
 
     # Check if the configuration file already exists
-    if [ -f "$SHUTTER_GENERATED_CONFIG_FILE" ]; then
+    if [ -f "$KEYPER_GENERATED_CONFIG_FILE" ]; then
         echo "[INFO | configure] Configuration file already exists. Skipping generation..."
         return
     fi
 
     echo "[INFO | configure] Generating configuration files..."
 
-    $SHUTTER_BIN gnosiskeyper generate-config --output "$SHUTTER_GENERATED_CONFIG_FILE"
+    $SHUTTER_BIN gnosiskeyper generate-config --output "$KEYPER_GENERATED_CONFIG_FILE"
 }
 
 init_keyper_db() {
@@ -23,7 +31,7 @@ init_keyper_db() {
 
     echo "[INFO | configure] Initializing keyper database..."
 
-    $SHUTTER_BIN gnosiskeyper initdb --config "$SHUTTER_GENERATED_CONFIG_FILE"
+    $SHUTTER_BIN gnosiskeyper initdb --config "$KEYPER_GENERATED_CONFIG_FILE"
 }
 
 init_chain() {
@@ -60,6 +68,8 @@ trigger_keyper_start() {
 
     supervisorctl start keyper
 }
+
+check_assets
 
 generate_keyper_config
 
