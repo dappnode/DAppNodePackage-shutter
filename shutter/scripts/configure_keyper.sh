@@ -50,7 +50,7 @@ sed -i "/^DKGPhaseLength/c\DKGPhaseLength = ${_ASSETS_DKG_PHASE_LENGTH}" "$KEYPE
 sed -i "/^DKGStartBlockDelta/c\DKGStartBlockDelta = ${_ASSETS_DKG_START_BLOCK_DELTA}" "$KEYPER_CONFIG_FILE"
 
 # Dynamic values (regenerated on each start)
-sed -i "/^DatabaseURL/c\DatabaseURL = \"${SHUTTER_DATABASEURL}\"" "$KEYPER_CONFIG_FILE"
+sed -i "/^DatabaseURL/c\DatabaseURL = \"${SHUTTER_DATABASE_URL}\"" "$KEYPER_CONFIG_FILE"
 sed -i "/^BeaconAPIURL/c\BeaconAPIURL = \"${SHUTTER_BEACONAPIURL}\"" "$KEYPER_CONFIG_FILE"
 sed -i "/^ContractsURL/c\ContractsURL = \"${SHUTTER_GNOSIS_NODE_CONTRACTSURL}\"" "$KEYPER_CONFIG_FILE"
 sed -i "/^MaxTxPointerAge/c\MaxTxPointerAge = ${SHUTTER_GNOSIS_MAXTXPOINTERAGE}" "$KEYPER_CONFIG_FILE"

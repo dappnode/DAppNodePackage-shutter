@@ -12,8 +12,8 @@ generate_keyper_config() {
 
     # Check if the configuration file already exists
     if [ -f "$KEYPER_GENERATED_CONFIG_FILE" ]; then
-        echo "[INFO | configure] Configuration file already exists. Skipping generation..."
-        return
+        echo "[INFO | configure] Configuration file already exists. Removing it..."
+        rm "$KEYPER_GENERATED_CONFIG_FILE"
     fi
 
     echo "[INFO | configure] Generating configuration files..."
