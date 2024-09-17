@@ -19,7 +19,7 @@ update_user_setting() {
 
     if [ -z "$value" ]; then
         echo "[INFO | metrics] Skipped updating $key in user settings file (empty value)"
-        return 1
+        return 0
     fi
 
     if grep -q "^$key=" "$USER_SETTINGS_FILE"; then
@@ -33,7 +33,7 @@ update_user_setting() {
     fi
 }
 
-source_envs() {
+source_assets_envs() {
     set -a # Export all variables
 
     # shellcheck disable=SC1091
@@ -49,10 +49,17 @@ source_envs() {
         _ASSETS_VERSION="$(cat /assets/version)"
     fi
 
-    # shellcheck disable=SC1090
-    . "$USER_SETTINGS_FILE"
-
     set +a
+}
+
+source_user_settings() {
+    # Ensure user settings file exists
+    if [ -f "$USER_SETTINGS_FILE" ]; then
+        set -a
+        # shellcheck disable=SC1090
+        . "$USER_SETTINGS_FILE"
+        set +a
+    fi
 }
 
 replace_envs_in_yaml() {
@@ -67,7 +74,9 @@ if [ "${SHUTTER_PUSH_METRICS_ENABLED}" = "false" ]; then
     exit 0
 fi
 
-source_envs
+source_assets_envs
+
+source_user_settings
 
 replace_envs_in_yaml
 
