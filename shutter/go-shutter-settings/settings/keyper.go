@@ -68,17 +68,12 @@ func AddSettingsToKeyper(generatedFilePath, configFilePath, outputFilePath strin
 		return err
 	}
 
-	// Print the config struct for debugging
-	fmt.Printf("Keyper config: %+v\n", keyperConfig)
-
 	PopulateFromEnv(&keyperConfig)
 
 	// Read and unmarshal the generated file
 	if err := UnmarshallFromFile(generatedFilePath, &generatedConfig); err != nil {
 		return err
 	}
-
-	fmt.Printf("Generated config: %+v\n", generatedConfig)
 
 	ApplyConfigToGenerated(reflect.ValueOf(keyperConfig), &generatedConfig, nil)
 

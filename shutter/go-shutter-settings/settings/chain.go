@@ -36,13 +36,7 @@ func AddSettingsToChain(generatedFilePath, outputFilePath string) error {
 		return err
 	}
 
-	// TODO: Remove this line
-	fmt.Printf("Generated chain config: %+v\n", generatedConfig)
-
     chainConfig := getChainConfigFromEnvs()
-
-	// TODO: Remove this line
-    fmt.Printf("Chain config: %+v\n", chainConfig)
 
     // ToLower is used because chain cofig file fields are lower case, but the struct
     // fields are upper case to be exported
