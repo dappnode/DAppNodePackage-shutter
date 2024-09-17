@@ -4,7 +4,6 @@ services:
       args:
         NETWORK: gnosis
         CHAIN_PORT: 26656
-        PROMETHEUS_LISTEN_PORT: 26660
         KEYPER_PORT: 23003
         KEYPER_METRICS_PORT: 9100
 
