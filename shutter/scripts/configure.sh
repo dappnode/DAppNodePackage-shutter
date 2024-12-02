@@ -31,7 +31,7 @@ init_keyper_db() {
 
     echo "[INFO | configure] Initializing keyper database..."
 
-    $SHUTTER_BIN gnosiskeyper initdb --config "$KEYPER_GENERATED_CONFIG_FILE"
+    $SHUTTER_BIN gnosiskeyper initdb --config "$KEYPER_CONFIG_FILE"
 }
 
 init_chain() {
@@ -73,11 +73,11 @@ check_assets
 
 generate_keyper_config
 
+configure_keyper
+
 init_keyper_db
 
 init_chain
-
-configure_keyper
 
 configure_chain
 

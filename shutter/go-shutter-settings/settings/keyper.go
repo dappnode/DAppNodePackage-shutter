@@ -10,6 +10,8 @@ type KeyperConfig struct {
 	InstanceID           int    `env:"_ASSETS_INSTANCE_ID"`
 	DatabaseURL          string `env:"SHUTTER_DATABASE_URL"`
 	BeaconAPIURL         string `env:"SHUTTER_BEACONAPIURL"`
+	HTTPEnabled          bool   `env:"SHUTTER_HTTP_ENABLED"`
+	HTTPListenAddress    string `env:"SHUTTER_HTTP_LISTEN_ADDRESS"`
 	MaxNumKeysPerMessage int    `env:"_ASSETS_MAX_NUM_KEYS_PER_MESSAGE"`
 	Gnosis               struct {
 		EncryptedGasLimit    int `env:"_ASSETS_ENCRYPTED_GAS_LIMIT"`
@@ -31,10 +33,15 @@ type KeyperConfig struct {
 	}
 	P2P struct {
 		P2PKey                   string   `env:"SHUTTER_P2P_KEY"`
-		ListenAddresses          string   `env:"SHUTTER_P2P_LISTENADDRESSES"`
-		AdvertiseAddresses       string   `env:"SHUTTER_P2P_ADVERTISEADDRESSES"`
+		ListenAddresses          []string `env:"SHUTTER_P2P_LISTENADDRESSES"`
+		AdvertiseAddresses       []string `env:"SHUTTER_P2P_ADVERTISEADDRESSES"`
 		CustomBootstrapAddresses []string `env:"_ASSETS_CUSTOM_BOOTSTRAP_ADDRESSES"`
 		DiscoveryNamespace       string   `env:"_ASSETS_DISCOVERY_NAME_PREFIX"`
+		FloodSubDiscovery        struct {
+			Enabled  bool     `env:"SHUTTER_P2P_FLOODSUBDISCOVERY_ENABLED"`
+			Interval int      `env:"SHUTTER_P2P_FLOODSUBDISCOVERY_INTERVAL"`
+			Topics   []string `env:"SHUTTER_P2P_FLOODSUBDISCOVERY_TOPICS"`
+		}
 	}
 	Shuttermint struct {
 		ShuttermintURL     string `env:"SHUTTER_SHUTTERMINT_SHUTTERMINTURL"`
@@ -44,7 +51,7 @@ type KeyperConfig struct {
 		DKGStartBlockDelta int    `env:"_ASSETS_DKG_START_BLOCK_DELTA"`
 	}
 	Metrics struct {
-		Enabled bool `env:"SHUTTER_ENABLED"`
+		Enabled bool `env:"SHUTTER_METRICS_ENABLED"`
 	}
 }
 

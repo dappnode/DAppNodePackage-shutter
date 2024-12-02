@@ -62,11 +62,6 @@ source_user_settings() {
     fi
 }
 
-replace_envs_in_yaml() {
-    echo "[INFO | metrics] Replacing environment variables in the configuration file"
-    sed "s|%{KEYPER_NAME}|$KEYPER_NAME|g; s|%{_ASSETS_VERSION}|$_ASSETS_VERSION|g" "$TEMPLATE_CONFIG_FILE" >"$CONFIG_FILE"
-}
-
 update_user_settings
 
 if [ "${SHUTTER_PUSH_METRICS_ENABLED}" = "false" ]; then
@@ -77,8 +72,6 @@ fi
 source_assets_envs
 
 source_user_settings
-
-replace_envs_in_yaml
 
 exec /vmagent-prod \
     -promscrape.config="${CONFIG_FILE}" \

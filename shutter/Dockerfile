@@ -6,7 +6,7 @@ FROM ghcr.io/shutter-network/assets:${ASSETS_VERSION} as assets
 RUN rsync -aq --delete /assets-source/ /assets/
 
 ARG UPSTREAM_VERSION
-FROM ghcr.io/shutter-network/rolling-shutter:${UPSTREAM_VERSION}
+FROM ghcr.io/shutter-network/keyper:${UPSTREAM_VERSION}
 
 ARG NETWORK
 ARG KEYPER_CONFIG_DIR

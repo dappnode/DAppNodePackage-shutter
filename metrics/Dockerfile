@@ -9,7 +9,6 @@ FROM victoriametrics/vmagent:v1.101.0
 ARG NETWORK
 
 ENV ASSETS_DIR=/assets \
-    TEMPLATE_CONFIG_FILE=/config/${NETWORK}/vmagent_template.yml \
     CONFIG_FILE=/config/${NETWORK}/vmagent.yml \
     USER_SETTINGS_FILE=/config/user/settings.env
 

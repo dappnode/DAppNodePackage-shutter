@@ -24,7 +24,7 @@ This package includes the following services:
 
   - Uses VictoriaMetrics to send performance metrics to a remote Pushgateway.
 
-  - Configuration is handled through templates in `/config/gnosis/`, and the main config file (`vmagent.yml`) is dynamically generated based on environment variables.
+  - Configuration is handled via the config file `/config/gnosis/vmagent.yml`, placehoders in that file are automatically picked up from the environment by vmagent.
 
 ### Configuration
 
