@@ -16,7 +16,7 @@ ARG CHAIN_PORT
 ARG STAKER_SCRIPTS_VERSION
 
 RUN apt-get update && \
-    apt-get --yes --no-install-recommends install supervisor postgresql-client && \
+    apt-get --yes --no-install-recommends install supervisor postgresql-client jq && \  
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
