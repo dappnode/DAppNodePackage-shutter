@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "globalEnvs": [
     {
-      "envs": ["PUBLIC_IP", "CONSENSUS_CLIENT_GNOSIS", "EXECUTION_CLIENT_GNOSIS"],
+      "envs": [
+        "PUBLIC_IP",
+        "CONSENSUS_CLIENT_GNOSIS",
+        "EXECUTION_CLIENT_GNOSIS"
+      ],
       "services": ["shutter"]
     }
   ]
