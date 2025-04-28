@@ -8,16 +8,15 @@ services:
       - db_data:/var/lib/postgresql/data
     healthcheck:
       test: pg_isready -U postgres
-
   shutter:
     build:
       context: shutter
       args:
-        ASSETS_VERSION: shutter-gnosis-1000-set1.3 # $NETWORK-10*$CHAIN_ID-set-$VERSION
+        ASSETS_VERSION: shutter-gnosis-1000-set1.3
         UPSTREAM_VERSION: v1.3.6
         KEYPER_CONFIG_DIR: /keyper/config
         SHUTTER_CHAIN_DIR: /chain
-        STAKER_SCRIPTS_VERSION: v0.1.0
+        STAKER_SCRIPTS_VERSION: v0.1.2
     restart: unless-stopped
     environment:
       SHUTTER_GNOSIS_NODE_PRIVATEKEY: ""
@@ -26,22 +25,20 @@ services:
     volumes:
       - chain:/chain
       - keyper-config:/keyper/config
-
   metrics:
     build:
       context: metrics
       args:
-        ASSETS_VERSION: shutter-gnosis-1000-set1.3 # $NETWORK-10*$CHAIN_ID-set-$VERSION
+        ASSETS_VERSION: shutter-gnosis-1000-set1.3
     restart: on-failure
     environment:
       SHUTTER_PUSH_METRICS_ENABLED: false
       KEYPER_NAME: ""
-      PUSHGATEWAY_URL: "https://keyperingest.metrics.shutter.network/api/v1/write"
+      PUSHGATEWAY_URL: https://keyperingest.metrics.shutter.network/api/v1/write
       PUSHGATEWAY_USERNAME: ""
       PUSHGATEWAY_PASSWORD: ""
     volumes:
       - metrics-config:/config
-
 volumes:
   db_data: {}
   chain: {}
