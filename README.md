@@ -1,3 +1,12 @@
+---
+This repo has been deprecated in favour of: https://github.com/shutter-network/DAppNodePackage-shutter !
+Shutter network also maintains: https://github.com/shutter-network/DAppnodePackage-shutter-api
+
+---
+
+
+
+
 # Shutter Dappnode Package
 
 This package runs a **Shutter Keyper**, as well as its corresponding **Shutter Chain** node, along with a **metrics service** to monitor the node's performance and a **PostgreSQL database** to store the Keyper's state.
